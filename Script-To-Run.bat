@@ -1,9 +1,9 @@
 :begin
 echo off
 echo -----------------------------
-echo ~~Script by eLoopWoo~~
+echo ~~Script by Tomer Eyzenberg~~
 echo -----------------------------
-set corewars=%CD%
+set corewars=%cd%
 chdir /d %corewars%\nasm
 echo ~~%cd%~~
 dir /OD /b *.asm
@@ -15,9 +15,9 @@ echo ~~Assembling %survivor%~~
 nasm.exe %survivor%
 echo -----------------------------
 SET survivor_ready=%survivor:~0,-4%
-echo ~~Disassembling %survivor_ready%~~ REM
-start "code" /B /D %cd% "ndisasm.exe" %survivor_ready% REM 
-timeout /t 1 >nul REM 
+echo ~~Disassembling %survivor_ready%~~ 
+start "code" /B /D %cd% "ndisasm.exe" %survivor_ready%  
+timeout /t 1 >nul  
 echo -----------------------------
 echo ~~Copy %survivor_ready%~~
 chdir /d %corewars%  
