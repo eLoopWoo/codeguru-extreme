@@ -24,18 +24,17 @@
 %endmacro
 
 set_hClone: ; store hClone bytes in private memory
-	mov si,ax
+	xchg si,ax
 	add si, hClone
+	push si
 	fClone_access wClone_number_of_words ; arena:hClone -> private_memory:0x0000  
-	add ax, hClone
+	pop di
 	mov dx, wEscape_distance
-	mov bx, ax
-hClone:
 	fFlip_ds_es ; ds -> private_memory & es -> arena
-		add bx,dx
-		mov di,bx
+hClone:
+		add di,dx
+		mov bx,di
 		xor si,si
 		fClone_access wClone_number_of_words ; private_memory:0x0000 -> arena:new_hClone
-	fFlip_ds_es ; ds->arena & es->private_memory
 	jmp bx ; bx -> hClone
 tail:
