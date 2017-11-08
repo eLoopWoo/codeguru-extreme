@@ -21,8 +21,8 @@
 %macro fBegin_bombing_arena 1
 	mov ax, %1
 	bombing_loop:
-		stosw ; ax -> es:di & di += 2
-		jmp bombing_loop
+		rep stosw ; ax -> es:di & di += 2
+		loop bombing_loop
 %endmacro
 
 

@@ -32,9 +32,9 @@ set_hClone: ; store hClone bytes in private memory
 	mov dx, wEscape_distance
 	fFlip_ds_es ; ds -> private_memory & es -> arena
 hClone:
-		add di,dx
-		mov bx,di
-		xor si,si
-		fClone_access wClone_number_of_words ; private_memory:0x0000 -> arena:new_hClone
+	add di,dx
+	mov bx,di
+	xor si,si
+	fClone_access wClone_number_of_words ; private_memory:0x0000 -> arena:new_hClone
 	jmp bx ; bx -> hClone
 tail:
