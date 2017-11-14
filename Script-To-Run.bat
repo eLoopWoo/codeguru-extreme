@@ -1,9 +1,20 @@
-:begin
 echo off
 echo -----------------------------
 echo ~~Script by Tomer Eyzenberg~~
 echo -----------------------------
-set home_folder=%cd%
+
+SET /p home_path=Enter cgx root path ( ./ use current ):
+if %home_path%==./ (
+	set home_folder=%cd%
+	) else ( set home_folder=%home_path%)
+echo %home_folder%
+chdir %home_folder%
+
+:begin
+echo -----------------------------
+echo ~~Script by Tomer Eyzenberg~~
+echo -----------------------------
+
 set nasm_folder=%cd%\nasm
 set survivors_folder=%cd%\survivors
 set work_folder=%cd%\work_directory
@@ -19,6 +30,7 @@ xcopy /s /y "%work_folder%\%survivor_asm%" "%nasm_folder%"
 echo ~~Assembling %survivor_asm%~~
 chdir /d %nasm_folder%
 nasm.exe %survivor_asm%
+del %survivor_asm%
 echo -----------------------------
 SET survivor_com=%survivor_asm:~0,-4%
 echo ~~Disassembling %survivor_com%~~ 

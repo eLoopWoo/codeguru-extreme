@@ -1,5 +1,14 @@
 echo off
-cls
+echo -----------------------------
+echo ~~Script by Tomer Eyzenberg~~
+echo -----------------------------
+
+SET /p home_path=Enter cgx root path ( ./ use current ):
+if %home_path%==./ (
+	set home_folder=%cd%
+	) else ( set home_folder=%home_path%)
+echo %home_folder%
+chdir %home_folder%
 
 echo "`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'
 echo The Grid. A digital frontier. 
@@ -67,6 +76,7 @@ set /p input=Enter option:
 	echo ~~Assembling %survivor_asm%~~
 	chdir /d %nasm_folder%
 	nasm.exe %survivor_asm%
+	del %survivor_asm%
 	echo -----------------------------
 	SET survivor_com=%survivor_asm:~0,-4%
 	echo ~~Disassembling %survivor_com%~~ 
@@ -103,6 +113,7 @@ set /p input=Enter option:
 	echo ~~Assembling %survivor_asm%~~
 	chdir /d %nasm_folder%
 	nasm.exe %survivor_asm%
+	del %survivor_asm%
 	echo -----------------------------
 	SET survivor_com=%survivor_asm:~0,-4%
 	echo ~~Disassembling %survivor_com%~~ 
@@ -169,6 +180,7 @@ set /p input=Enter option:
 		echo -----------------------------
 		echo ~~Assembling %survivor%~~
 		nasm.exe %survivor%
+		del %survivor_asm%
 		echo -----------------------------
 		SET survivor_ready=%survivor:~0,-4%
 		echo ~~Disassembling %survivor_ready%~~ 
