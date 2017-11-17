@@ -2,7 +2,6 @@ echo off
 echo -----------------------------
 echo ~~Script by Tomer Eyzenberg~~
 echo -----------------------------
-chdir /d  ..
 
 SET /p home_path=Enter cgx root path ( ./ use current ):
 if %home_path%==./ (
