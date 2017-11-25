@@ -137,30 +137,33 @@ set /p input=Enter option:
 	echo ~~Enter an option~~
 	echo -----------------------------
 	echo 0)Add survivor
-	echo 1)Del survivor
-	echo 2)Run debugger
-	echo 3)Run silent
-	echo 4)Show /survivors
-	echo 5)Show /nasm
+	echo 1)Add survivor-asm (.asm)
+	echo 2)Del survivor
+	echo 3)Run debugger
+	echo 4)Run silent
+	echo 5)Show /survivors
+	echo 6)Show /work_directory
 	set /p input-config=Enter an option: 
 		if %input-config%==0 (
-		echo %input-config%
 		goto add-survivor
 		)
 		if %input-config%==1 (
-		goto del-survivor
+		goto add-survivor-asm
 		)
 		if %input-config%==2 (
+		goto del-survivor
+		)
+		if %input-config%==3 (
 		goto run-debugger
 		) 
-		if %input-config%==3 (
+		if %input-config%==4 (
 		goto run-silent
 		) 
-		if %input-config%==4 (
+		if %input-config%==5 (
 		goto show-survivors
 		)
-		if %input-config%==5 (
-		goto show-nasm
+		if %input-config%==6 (
+		goto show-work-directory
 		)
 		echo ~~Bad Input~~
 		echo -----------------------------
@@ -170,44 +173,65 @@ set /p input=Enter option:
 		echo -----------------------------
 		echo ~~tron-legacy-add-survivor~~
 		echo -----------------------------
-		set corewars=%cd%
-		chdir /d %corewars%\nasm
-		echo ~~%cd%~~
-		dir /OD /b *.asm
+		set nasm_folder=%cd%\nasm
+		set survivors_folder=%cd%\survivors
+		set work_folder=%cd%\work_directory
+		echo ~~%work_folder%~~
+		dir /OD /b %work_folder%\*.
 		echo -----------------------------
 		echo ~~Choose survivor~~
-		SET /p survivor=Enter survivor ( with extension .asm ):
+		chdir /d %work_folder%
+		SET /p survivor_com=Enter survivor:
+		echo ~~Copy %survivor_com%~~
+		copy /y "%work_folder%\%survivor_com%" "%survivors_folder%"
+		chdir /d %home_folder%  
+		goto tron-legacy-config
+	:add-survivor-asm
 		echo -----------------------------
-		echo ~~Assembling %survivor%~~
-		nasm.exe %survivor%
+		echo ~~tron-legacy-add-survivor-asm~~
+		echo -----------------------------
+		set nasm_folder=%cd%\nasm
+		set survivors_folder=%cd%\survivors
+		set work_folder=%cd%\work_directory
+		echo ~~%work_folder%~~
+		dir /OD /b %work_folder%\*.asm
+		echo -----------------------------
+		echo ~~Choose survivor~~
+		chdir /d %work_folder%
+		SET /p survivor_asm=Enter survivor ( with extension .asm ):
+		echo -----------------------------
+		echo ~~Copy %survivor_asm%~~
+		xcopy /s /y "%work_folder%\%survivor_asm%" "%nasm_folder%" 
+		echo ~~Assembling %survivor_asm%~~
+		chdir /d %nasm_folder%
+		nasm.exe %survivor_asm%
 		del %survivor_asm%
 		echo -----------------------------
-		SET survivor_ready=%survivor:~0,-4%
-		echo ~~Disassembling %survivor_ready%~~ 
-		start "code" /B /D %cd% "ndisasm.exe" %survivor_ready%  
+		SET survivor_com=%survivor_asm:~0,-4%
+		echo ~~Disassembling %survivor_com%~~ 
+		start "code" /B /D %nasm_folder% "ndisasm.exe" %survivor_com%  
 		timeout /t 1 >nul  
 		echo -----------------------------
-		echo ~~Copy %survivor_ready%~~
-		chdir /d %corewars%  
-		xcopy /s /y "%cd%\nasm\%survivor_ready%" "%cd%\survivors" 
-		echo -----------------------------
+		echo ~~Copy %survivor_com%~~
+		move /y "%nasm_folder%\%survivor_com%" "%survivors_folder%"
+		chdir /d %home_folder%  
 		goto tron-legacy-config 
 	:del-survivor
 		echo -----------------------------
 		echo ~~tron-legacy-del-survivor~~
 		echo -----------------------------
-		set corewars=%cd%
-		chdir /d %corewars%\nasm
-		echo ~~%cd%~~
-		dir /OD /b *.asm
+		set survivors_folder=%cd%\survivors
+		echo ~~%survivors_folder%~~
+		dir /OD /b %survivors_folder%\*
 		echo -----------------------------
 		echo ~~Choose survivor~~
-		SET /p survivor=Enter survivor ( with extension .asm ):
-		SET survivor_ready=%survivor:~0,-4%
+		chdir /d %survivors_folder%
+		SET /p survivor=Enter survivor:
+		SET survivor_ready=%survivor%
 		echo -----------------------------
-		chdir /d %corewars%  
-		move "%cd%\survivors\%survivor_ready%" "%cd%\%temp_directory%" 
-		goto tron-legacy-config
+		del %survivors_folder%\%survivor%
+		chdir /d %home_folder%  
+		goto tron-legacy-config 
 	:run-debugger
 		echo -----------------------------
 		echo ~~tron-legacy-run-debugger~~
@@ -224,21 +248,18 @@ set /p input=Enter option:
 		echo -----------------------------
 		echo ~~tron-legacy-show-survivors~~
 		echo -----------------------------
-		set corewars=%cd%
-		chdir /d %corewars%\survivors
-		echo ~~%cd%~~
-		dir /OD /b
-		chdir /d %corewars%  
+		set survivors_folder=%cd%\survivors
+		echo ~~%survivors_folder%~~
+		dir /OD /b %survivors_folder%\*
 		goto tron-legacy-config
-	:show-nasm
+	:show-work-directory
 		echo -----------------------------
-		echo ~~tron-legacy-show-nasm~~
+		echo ~~tron-legacy-show-work-directory~~
 		echo -----------------------------
-		set corewars=%cd%
-		chdir /d %corewars%\nasm
-		echo ~~%cd%~~
-		dir /OD /b *.asm
-		chdir /d %corewars%  
+		set work_folder=%cd%\work_directory
+		echo ~~%work_folder%~~
+		dir /OD /b %work_folder%\*.asm
+		dir /OD /b %work_folder%\*.
 		goto tron-legacy-config
 goto begin
 
