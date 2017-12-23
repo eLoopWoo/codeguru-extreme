@@ -25,7 +25,7 @@ CGX10 Debugger [YoavKa](https://github.com/YoavKa)
 CoreWars8086 4.0.0 [codeguru-il](https://github.com/codeguru-il)
 
 ### Mac Users
-http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/jdk-9.0.1_osx-x64_bin.dmg - JAVA JDK
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html - JAVA JDK
 
 https://atom.io/ - Atom IDE
 
