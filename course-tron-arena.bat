@@ -2,12 +2,15 @@ echo off
 echo -----------------------------
 echo ~~Script by Tomer Eyzenberg~~
 echo -----------------------------
-
-SET /p home_path=Enter cgx root path ( ./ use current ):
+echo -----------------------------
+echo ~~tron-arena~~
+echo -----------------------------
+SET /p home_path=Enter cgx root path ( if you don't know what to do just type ./):
 if %home_path%==./ (
 	set home_folder=%cd%
 	) else ( set home_folder=%home_path%)
-echo %home_folder%
+
+echo {cgx_root_path} = %home_folder%
 chdir %home_folder%
 
 echo "`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'
@@ -29,32 +32,47 @@ mkdir %temp_directory% 2>NUL
 ::move  "%cd%\survivors\*." "%cd%\%temp_directory%" 2>NUL
 :begin
 echo -----------------------------
-echo ~~Enter an option~~
+echo ~~Enter an option (number)~~
 echo -----------------------------
-echo 0)Run Tron
-echo 1)Run Script-To-Run once
-echo 2)Run Script-To-Run loop
+echo 0)Help
+echo 1)Run Tron
+echo 2)Run Script-To-Run once
+echo 3)Run Script-To-Run loop
 echo +
 
 set /p input=Enter option:
 	if %input%==0 (
-	goto tron-legacy
+	goto help
 	) 
 	if %input%==1 (
-	goto run-once
+	goto tron-legacy
 	) 
 	if %input%==2 (
+	goto run-once
+	) 
+	if %input%==3 (
 	goto run-loop
 	) 
-	ELSE (
 	echo -----------------------------
 	echo ~~Bad Input~~
 	echo -----------------------------
 	goto begin
-	)
 	
-
-	
+:help
+	echo -----------------------------
+	echo ~~Help~~
+	echo -----------------------------
+	echo Run Tron provides a cli way for development process,
+	echo assumes work_directory is used to store survivors .asm
+	echo files. This script provides automated ways
+	echo to assemble->copy->run flows as add/remove/list files from
+	echo /survivors directory and /work_directory.
+	echo +
+	echo Run Script-To-Run once/loop help
+	echo Assumes work_directory is used to store survivors .asm files.
+	echo This script provides a way to automate assemble->copy->run
+	echo proccess a .asm files stored in {cgx_root_path}/work_directory
+	goto begin
 
 :run-once
 	echo -----------------------------
@@ -136,39 +154,54 @@ set /p input=Enter option:
 	echo -----------------------------
 	echo ~~Enter an option~~
 	echo -----------------------------
-	echo 0)Add survivor
-	echo 1)Add survivor-asm (.asm)
-	echo 2)Del survivor
-	echo 3)Run debugger
-	echo 4)Run silent
-	echo 5)Show /survivors
-	echo 6)Show /work_directory
+	echo 0)Help
+	echo 1)Add survivor
+	echo 2)Add survivor-asm (.asm)
+	echo 3)Del survivor
+	echo 4)Run debugger
+	echo 5)Run silent
+	echo 6)Show /survivors
+	echo 7)Show /work_directory
 	set /p input-config=Enter an option: 
 		if %input-config%==0 (
-		goto add-survivor
+		goto help-tron
 		)
 		if %input-config%==1 (
-		goto add-survivor-asm
+		goto add-survivor
 		)
 		if %input-config%==2 (
-		goto del-survivor
+		goto add-survivor-asm
 		)
 		if %input-config%==3 (
+		goto del-survivor
+		)
+		if %input-config%==4 (
 		goto run-debugger
 		) 
-		if %input-config%==4 (
+		if %input-config%==5 (
 		goto run-silent
 		) 
-		if %input-config%==5 (
+		if %input-config%==6 (
 		goto show-survivors
 		)
-		if %input-config%==6 (
+		if %input-config%==7 (
 		goto show-work-directory
 		)
 		echo ~~Bad Input~~
 		echo -----------------------------
 		goto tron-legacy-config
-		
+	
+	:help-tron
+	echo -----------------------------
+	echo ~~Help~~
+	echo -----------------------------
+	echo This script can help you automate development
+	echo process and assumes work_directory is used to store
+	echo survivors .asm files. This script provides automated ways
+	echo to assemble->copy->run flows as add/remove/list files from
+	echo /survivors directory and /work_directory.
+	goto tron-legacy-config
+	
 	:add-survivor
 		echo -----------------------------
 		echo ~~tron-legacy-add-survivor~~

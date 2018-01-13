@@ -2,23 +2,30 @@ echo off
 echo -----------------------------
 echo ~~Script by Tomer Eyzenberg~~
 echo -----------------------------
-
-SET /p home_path=Enter cgx root path ( ./ use current ):
+echo -----------------------------
+echo ~~script-to-run-~~
+echo -----------------------------
+SET /p home_path=Enter cgx root path ( if you don't know what to do just type ./):
 if %home_path%==./ (
 	set home_folder=%cd%
 	) else ( set home_folder=%home_path%)
-echo %home_folder%
+echo {cgx_root_path} = %home_folder%
 chdir %home_folder%
 
+:help
+echo -----------------------------
+echo ~~Help~~
+echo -----------------------------
+echo Assumes work_directory is used to store survivors .asm files.
+echo This script provides a way to automate assemble->copy->run
+echo proccess a .asm files stored in {cgx_root_path}/work_directory
+echo -----------------------------
 :begin
-echo -----------------------------
-echo ~~Script by Tomer Eyzenberg~~
-echo -----------------------------
-
 set nasm_folder=%cd%\nasm
 set survivors_folder=%cd%\survivors
 set work_folder=%cd%\work_directory
-echo ~~%work_folder%~~
+echo ~~Searching for .asm files in~~
+echo %work_folder%
 dir /OD /b %work_folder%\*.asm
 echo -----------------------------
 echo ~~Choose survivor~~
