@@ -48,11 +48,22 @@ function download_jdk(){
 	rm jdk-8u191-linux-x64.tar.gz
 }
 
+function set_symbolic_link(){
+	echo "[*] Symbolic link for survivros/zombies..."
+	rm -r $CGX_RESEARCH_CGX/survivors
+	rm -r $CGX_RESEARCH_CGX/zombies
+
+	ln -s $CGX_RESEARCH_ENV/survivors $CGX_RESEARCH_CGX/survivors 
+	ln -s $CGX_RESEARCH_ENV/zombies $CGX_RESEARCH_CGX/zombies 
+
+}
+
 function download(){
 	download_jdk $1
 	download_cgx $1
 	download_cgx_debugger $1
 	download_survivors
+	set_symbolic_link
 }
 
 function main(){	
