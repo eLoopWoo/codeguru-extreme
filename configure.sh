@@ -15,6 +15,7 @@ function configure(){
 	export CGX_RESEARCH_CGX_VERSION="4.0.2"
 	export CGX_RESEARCH_CGX_DEBUGGER_VERSION="v5"
 	export CGX_RESEARCH_JDK_VERSION="jdk1.8.0_191"
+	export CGX_RESEARCH_NASM_VERSION="2.13"
 
 	export CGX_RESEARCH_HOME=$(readlink -f $1)
 	export CGX_RESEARCH_ENV=$CGX_RESEARCH_HOME/environment
