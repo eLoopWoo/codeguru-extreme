@@ -20,9 +20,6 @@ function configure(){
 	export CGX_RESEARCH_ENV=$CGX_RESEARCH_HOME/environment
 	export CGX_RESEARCH_JDK=$CGX_RESEARCH_HOME/jdk1.8.0_191
 	export CGX_RESEARCH_CGX=$CGX_RESEARCH_HOME/cgx_engine_$CGX_RESEARCH_CGX_VERSION
-
-	# https://github.com/YoavKa/corewars8086/releases/download/v5/debugger.jar
-	# https://github.com/codeguru-il/corewars8086/releases/download/corewars8086-4.0.2/corewars8086-4.0.2.zip
 }
 
 function main(){	

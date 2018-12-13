@@ -1,8 +1,0 @@
-a+(-a) mod m = 0
-a*(a-1) mod m = 1 ( a ≠ 0)
-a • b mod m = b • a mod m
-a • (b • c)mod m = (a • b) • c mod m
-a * (b+c) mod m=[(a*b)+ (a *c)] mod m
-(a • b ) mod m =[(a mod m) • (b mod m)] mod m
-
-• plus or mul

@@ -2,12 +2,12 @@
 
 
 function welcome(){
-	base64 "$CGX_RESEARCH_HOME/misc/logo$(( ( RANDOM %  $(ls misc/ | grep logo | wc -l)  ) ))" --decode
 	echo "** CGX Linux Environment **"
         if [ -z $CGX_RESEARCH_ENABLE ] ; then
                 echo "error: \$CGX_RESEARCH_ENABLE is not set"
                 exit 1
         fi
+	base64 "$CGX_RESEARCH_HOME/misc/logo$(( ( RANDOM %  $(ls $CGX_RESEARCH_HOME/misc/ | grep logo | wc -l)  ) ))" --decode
 
 }
 
