@@ -58,12 +58,29 @@ function set_symbolic_link(){
 
 }
 
+function download_nasm(){
+	echo "[*] Installing nasm..."
+	rm -r nasm_dir
+	mkdir nasm_dir
+	cd nasm_dir
+	wget https://www.nasm.us/pub/nasm/releasebuilds/$CGX_RESEARCH_NASM_VERSION/nasm-$CGX_RESEARCH_NASM_VERSION.zip -O nasm-$CGX_RESEARCH_NASM_VERSION.zip --append-output $1
+	unzip -qq nasm-$CGX_RESEARCH_NASM_VERSION.zip 
+	sed -i 's/\r//' configure
+	./configure
+	make
+	mv nasm ../environment
+	mv ndisasm ../environment
+	cd ../
+	rm -r nasm_dir
+
+}
 function download(){
 	download_jdk $1
 	download_cgx $1
 	download_cgx_debugger $1
 	download_survivors
 	set_symbolic_link
+	download_nasm $1
 }
 
 function main(){	
