@@ -11,15 +11,15 @@ function welcome(){
 
 }
 
-function cgx_run(){
-	echo "[*] Donwloading Debug CGX..."
+function cgx_debug(){
+	echo "[*] Debug i8086 CGX..."
 	cd $CGX_RESEARCH_CGX
 	$CGX_RESEARCH_JDK/bin/java -cp "lib/cgx_debugger_$CGX_RESEARCH_CGX_DEBUGGER_VERSION.jar:lib/commons-math3-3.4.1.jar" il.co.codeguru.corewars8086.CoreWarsEngine
 	cd -
 }
 function main(){	
 	welcome
-	cgx_run
+	cgx_debug
 }
 
 main

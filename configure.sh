@@ -5,7 +5,9 @@ function welcome(){
 	base64 "misc/logo$(( ( RANDOM %  $(ls misc/ | grep logo | wc -l)  ) ))" --decode
 	export CGX_RESEARCH_ENABLE="1"
 	if [ -z "$1" ]; then
+		echo "****"
 		echo "usage: source configure project_path"
+		echo "****"
 		export CGX_RESEARCH_ENABLE="0"
 	fi
 }

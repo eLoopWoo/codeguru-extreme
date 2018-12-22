@@ -12,7 +12,7 @@ function welcome(){
 }
 
 function cgx_run(){
-	echo "[*] Donwloading Run CGX..."
+	echo "[*] Run i8086 CGX..."
 	cd $CGX_RESEARCH_CGX
 	$CGX_RESEARCH_JDK/bin/java -cp "lib/corewars8086-$CGX_RESEARCH_CGX_VERSION.jar:lib/commons-math3-3.4.1.jar" il.co.codeguru.corewars8086.CoreWarsEngine
 	cd -
