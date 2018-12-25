@@ -22,6 +22,7 @@ function build(){
 	echo $survivor_name
 	/opt/riscv/bin/riscv32-unknown-linux-gnu-as $1 -o $2
 	/opt/riscv/bin/riscv32-unknown-linux-gnu-objcopy -O binary $2 $survivor_name
+	/opt/riscv/bin/riscv32-unknown-linux-gnu-objdump -D -b binary -mriscv $survivor_name
 	echo "[*] Built $survivor_name..."
 }
 function main(){	
