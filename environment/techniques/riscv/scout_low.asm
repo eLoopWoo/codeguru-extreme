@@ -13,12 +13,12 @@ scout:
 
 scout_low_addr:
     mv x6, x1
-    loop:
+    scout_copy_loop:
         add x4, x4, -1
         lw x2, (x1)
         sw x2, -74(x1)
         add x1, x1, 4
-        bne x4, x5, loop
+        bne x4, x5, scout_copy_loop
     mv x1, x6
     add x1, x1, -74
     j x1-74
