@@ -1,3 +1,3 @@
-# Technieque - Stand Still
+# Technieque - Still
 j x1
 
