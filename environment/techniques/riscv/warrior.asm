@@ -1,7 +1,6 @@
 # Technique - Warrior
-add x2, x2, 4
-add x1, x1, x2
-sw x2, 16(x1)
-sub x1, x1, x2
-j x1
+warrior:
+    add x1, x1, 4
+    sw zero, 32(x1)
+    j warrior
 
